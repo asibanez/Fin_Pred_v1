@@ -1,8 +1,8 @@
 #INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed
 #OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs
 
-INPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed
-OUTPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/02_runs/00_run_test
+INPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary
+OUTPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/02_runs/01_run_test_binary
 
 python -m ipdb train_test.py \
     --input_dir=$INPUT_DIR \
@@ -18,7 +18,7 @@ python -m ipdb train_test.py \
     --use_cuda=True \
     \
     --n_epochs=10 \
-    --batch_size_train=600 \
+    --batch_size_train=1200 \
     --shuffle_train=True \
     --drop_last_train=False \
     --dev_train_ratio=2 \
@@ -31,7 +31,7 @@ python -m ipdb train_test.py \
     --save_final_model=True \
     --save_model_steps=True \
     --save_step_cliff=0 \
-    --gpu_ids_train=1,2 \
+    --gpu_ids_train=1,2,3,4 \
     \
     --test_file=model_test.pkl \
     --model_file=model.pt.9 \
