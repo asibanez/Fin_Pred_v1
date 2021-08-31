@@ -7,7 +7,8 @@ from sklearn.model_selection import train_test_split
 pd.set_option('display.max_rows', 100)
 
 #%% Path definitions
-input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed'
+#input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed'
+input_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary'
 output_folder = input_folder
 
 input_path = os.path.join(input_folder, 'preproc_2019_mapped_SP500_full_v2.pkl')
