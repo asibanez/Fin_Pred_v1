@@ -10,7 +10,7 @@ python -m ipdb train_test.py \
     --task=Test \
     \
     --seq_len=256 \
-    --num_labels=3 \
+    --num_labels=1 \
     --n_heads=8 \
     --hidden_dim=512 \
     --pad_idx=0 \

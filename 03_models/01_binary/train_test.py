@@ -154,7 +154,7 @@ def main():
     optimizer = torch.optim.Adam(model.parameters(),
                                  lr = args.lr,
                                  weight_decay = args.wd)
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.BCEWithLogitsLoss()
 
     # Train procedure
     if args.task == 'Train':
