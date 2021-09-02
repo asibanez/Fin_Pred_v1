@@ -1,25 +1,25 @@
 #INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed
 #OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs
 
-INPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary
-OUTPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/02_runs/01_run_test_binary
+INPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary
+OUTPUT_DIR=/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/03_runs/01_ProsusAI_finbert/00_run_binary
 
-python -m ipdb train_test.py \
+python train_test.py \
     --input_dir=$INPUT_DIR \
     --output_dir=$OUTPUT_DIR \
     --task=Test \
     \
-    --model_name=nlpaueb/legal-bert-small-uncased
+    --model_name=ProsusAI/finbert \
     --seq_len=256 \
     --num_labels=1 \
     --n_heads=8 \
-    --hidden_dim=512 \
+    --hidden_dim=768 \
     --pad_idx=0 \
     --seed=1234 \
     --use_cuda=True \
     \
     --n_epochs=10 \
-    --batch_size_train=1200 \
+    --batch_size_train=400 \
     --shuffle_train=True \
     --drop_last_train=False \
     --dev_train_ratio=2 \
@@ -35,11 +35,14 @@ python -m ipdb train_test.py \
     --gpu_ids_train=1,2,3,4 \
     \
     --test_file=model_test.pkl \
-    --model_file=model.pt.9 \
+    --model_file=model.pt.3 \
     --batch_size_test=200 \
     --gpu_id_test=1 \
 
 #read -p 'EOF'
+
+#--model_name=nlpaueb/legal-bert-small-uncased \
+#--hidden_dim=512 \
 
 #--task=Train / Test
 #--batch_size=40
