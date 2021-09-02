@@ -9,6 +9,7 @@ python -m ipdb train_test.py \
     --output_dir=$OUTPUT_DIR \
     --task=Test \
     \
+    --model_name=nlpaueb/legal-bert-small-uncased
     --seq_len=256 \
     --num_labels=3 \
     --n_heads=8 \
@@ -41,6 +42,7 @@ python -m ipdb train_test.py \
 #read -p 'EOF'
 
 #--task=Train / Test
+#--model_name=nlpaueb/legal-bert-small-uncased
 #--batch_size=40
 #--batch_size=25 / 0,1,2,3
 #--n_epochs=100

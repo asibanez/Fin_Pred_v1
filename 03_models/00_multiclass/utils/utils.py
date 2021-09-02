@@ -18,6 +18,8 @@ def parse_args_f():
                         help = 'number of total epochs to run')
     
     # Common arguments
+    parser.add_argument('--model_name', default = None, type = str, required = True,
+                        help = 'BERT_model_name')   
     parser.add_argument('--seq_len', default = None, type = int, required = True,
                         help = 'text sequence length')
     parser.add_argument('--num_labels', default = None, type = int, required = True,

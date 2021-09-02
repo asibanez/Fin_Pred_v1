@@ -9,6 +9,7 @@ python -m ipdb train_test.py \
     --output_dir=$OUTPUT_DIR \
     --task=Test \
     \
+    --model_name=nlpaueb/legal-bert-small-uncased
     --seq_len=256 \
     --num_labels=1 \
     --n_heads=8 \

@@ -36,7 +36,7 @@ class News_model(nn.Module):
         self.dropout = args.dropout
                      
         # Bert layer
-        self.model_name = 'nlpaueb/legal-bert-small-uncased'
+        self.model_name = args.model_name
         self.bert_model = AutoModel.from_pretrained(self.model_name)
         
         # Transformer layers
