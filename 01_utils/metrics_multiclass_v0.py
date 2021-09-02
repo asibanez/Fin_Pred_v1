@@ -34,7 +34,7 @@ ratio_0 = Y_ground_truth.count(0) / len(Y_ground_truth)
 ratio_1 = Y_ground_truth.count(1) / len(Y_ground_truth)
 ratio_2 = Y_ground_truth.count(2) / len(Y_ground_truth)
 
-print(f'Ratio class 0 = {ratio_0 * 100:.2f}%')
+print(f'\nRatio class 0 = {ratio_0 * 100:.2f}%')
 print(f'Ratio class 1 = {ratio_1 * 100:.2f}%')
 print(f'Ratio class 2 = {ratio_2 * 100:.2f}%')
 
@@ -49,18 +49,3 @@ plt.legend(loc = 'upper right')
 #plt.ylim(0.05, 0.75)
 plt.grid()
 plt.show()
-
-
-#%%
-gt =   [0,1,1,0,2,2]
-pred = [1,1,1,0,2,2]
-
-pred_2 = [[1,0,0],
-          [0,1,0],
-          [0,1,0],
-          [1,0,0],
-          [0,0,1],
-          [0,0,1]]
-#%%
-print(classification_report(gt, pred))
-
