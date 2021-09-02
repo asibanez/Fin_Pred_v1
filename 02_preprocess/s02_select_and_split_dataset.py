@@ -7,11 +7,11 @@ from sklearn.model_selection import train_test_split
 pd.set_option('display.max_rows', 100)
 
 #%% Path definitions
-#input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed'
-input_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary'
+input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary'
+#input_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary'
 output_folder = input_folder
 
-input_path = os.path.join(input_folder, 'preproc_2019_mapped_SP500_full_v2.pkl')
+input_path = os.path.join(input_folder, 'preproc_2019_mapped_SP500_full.pkl')
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
 output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
 output_path_test = os.path.join(output_folder, 'model_test.pkl')
@@ -42,7 +42,7 @@ train_set_df, test_dev_set_df = train_test_split(output_df, test_size = 0.2)
 dev_set_df, test_set_df = train_test_split(test_dev_set_df, test_size = 0.5)
 
 #%% Check dataset sizes
-print(f'Shape train set = {train_set_df.shape}')
+print(f'\nShape train set = {train_set_df.shape}')
 print(f'% train set: {len(train_set_df)/len(output_df)*100:.2f}%\n')
 print(f'Shape dev set = {dev_set_df.shape}')
 print(f'Dev: {len(dev_set_df)/len(output_df)*100:.2f}%\n')
