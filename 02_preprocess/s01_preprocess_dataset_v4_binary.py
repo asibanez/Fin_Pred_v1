@@ -48,14 +48,14 @@ def generate_labels_f(returns):
     return labels            
 
 #%% Path definition
-#input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed'
-#output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed/01_binary'
+input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_structured'
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary'
 
-input_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed'
-output_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary'
+#input_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed'
+#output_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/01_preprocessed/01_binary'
 
 input_path = os.path.join(input_folder, 'structured_2019_mapped_SP500_full.pkl')
-output_pkl_path = os.path.join(output_folder, 'preproc_2019_mapped_SP500_full_v2.pkl')
+output_pkl_path = os.path.join(output_folder, 'preproc_2019_mapped_SP500_full.pkl')
 
 #%% Global initialization
 seq_len = 256
@@ -63,7 +63,7 @@ max_n_pars_facts = 50
 pad_int = 0
 toy_data = False
 len_toy_data = 100
-model_name = 'nlpaueb/legal-bert-small-uncased'
+model_name = 'ProsusAI/finbert'
 pd.set_option('display.max_rows', 100)
 
 #%% Data loading
