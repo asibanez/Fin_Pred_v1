@@ -27,7 +27,7 @@ def compute_metrics(Y_ground_truth, Y_pred_binary, Y_pred_score):
     return precision, recall, f1, auc
 
 #%% Path definitions
-base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_run_test_binary'
+base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_run_binary'
 
 #%% Global initialization
 random.seed(1234)
@@ -92,6 +92,7 @@ plt.plot(fpr_rand, tpr_rand, linestyle=':', label='Random')
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.legend(loc = 'lower right')
+plt.ylim(-0.05, 1.05)
 plt.grid()
 plt.show()    
 
@@ -103,6 +104,7 @@ plt.plot(recall_rand_g, precision_rand_g, linestyle=':', label='Random')
 plt.xlabel('Recall')
 plt.ylabel('Precision')
 plt.legend(loc = 'upper right')
+plt.ylim(-0.05, 1.05)
 plt.grid()
 plt.show()
 
