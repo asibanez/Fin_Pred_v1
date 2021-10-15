@@ -12,9 +12,9 @@ from datetime import datetime
 pd.set_option('display.max_rows', 100)
 
 #%% Path definitions
-news_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/03_spy_project/00_data/2019/News'
-trna_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/03_spy_project/00_data/2019/TRNA'
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/03_spy_project/00_data/01_preprocessed'
+news_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/2019/News'
+trna_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/2019/TRNA'
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/01_preprocessed'
 
 news_paths = sorted(glob(os.path.join(news_folder, '*.txt')))
 trna_news_paths = sorted(glob(os.path.join(trna_folder, '**/*News.txt.gz'), recursive = True))
