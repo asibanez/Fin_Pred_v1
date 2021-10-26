@@ -93,7 +93,7 @@ for asset in tqdm(asset_list):
                         index = output_df_1.columns)
         output_df_1 = output_df_1.append(row, ignore_index = True)
     
-#%% #%% Generate output_df_2 (2D attention over n news and m days)
+#%% Generate output_df_2 (2D attention over n news and m days)
 output_df_2 = pd.DataFrame(columns = ['date',
                                     'asset',
                                     'headlines',
