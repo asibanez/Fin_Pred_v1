@@ -28,7 +28,7 @@ dates_new = [arrow.get(x).date() for x in dates]
 data['date'] = dates_new
 
 #%% Sort dataset
-data_sorted = data_sorted = data.sort_values(by = ['assetName', 'date'])
+data_sorted = data.sort_values(by = ['assetName', 'date'])
 asset_list = sorted(list(set(data_sorted.assetName)))
 date_list = sorted(list(set(data_sorted.date)))
 
