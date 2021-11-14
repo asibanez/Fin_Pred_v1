@@ -11,7 +11,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer
 
 #%% Path definition
-path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/preproc_2019_mapped_SP500_full.pkl'
+path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/00_toy_dataset/preproc_2019_mapped_SP500_full.pkl'
 
 #%% Global initialization
 days_considered = 3
