@@ -1,4 +1,4 @@
-model# v1 -> Preprocesses dataset to correct mistake with empty headlines
+# v1 -> Preprocesses dataset to correct mistake with empty headlines
 # v2 -> No preprocessing. Fixed bug with binary predictions
 
 # Imports
@@ -28,7 +28,7 @@ class News_dataset(Dataset):
         self.token_types = [i for idx, i in enumerate(self.token_types) if not(slicer[idx])]
         self.att_masks = [i for idx, i in enumerate(self.att_masks) if not(slicer[idx])]
         self.labels = [i for idx, i in enumerate(self.labels) if not(slicer[idx])]
-        
+        # Generate tensors
         self.token_ids = torch.stack(self.token_ids)
         self.token_types = torch.stack(self.token_types)
         self.att_masks = torch.stack(self.att_masks)

@@ -18,7 +18,7 @@ python train_test.py \
     --seed=1234 \
     --use_cuda=True \
     \
-    --n_epochs=10 \
+    --n_epochs=5 \
     --batch_size_train=250 \
     --shuffle_train=True \
     --drop_last_train=False \
