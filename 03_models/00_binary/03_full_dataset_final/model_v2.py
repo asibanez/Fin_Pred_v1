@@ -87,7 +87,7 @@ class News_model(nn.Module):
         out = out['pooler_output']                               # batch_size x h_dim
         
         # Multi-label classifier      
-        out = self.bn1(out)                                      # batch_size x h_dim
+        #out = self.bn1(out)                                      # batch_size x h_dim
         out = self.fc_out(out)                                   # batch_size x n_lab
         out = self.sigmoid(out)                                  # batch_size x n_lab
 
