@@ -9,7 +9,7 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from model_v1 import News_dataset, News_model
+from model_v2 import News_dataset, News_model
 import utils.utils as utils
 
 #%% Function definitions
@@ -73,7 +73,7 @@ def run_epoch_f(args, mode, model, criterion, optimizer,
         current_batch_size = X_token_ids.size()[0]
         total_entries += current_batch_size
         sum_loss += (loss.item() * current_batch_size)
-        pred_labels = pred_score.argmax(dim = 1)
+        pred_labels = torch.round(pred_score)
         sum_correct += (pred_labels == Y_labels).sum().item()
       
         # Append predictions to lists
