@@ -2,12 +2,12 @@
 #OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/05_run_full_2019_final
 
 INPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/03_full_final_2019
-OUTPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/03_runs/01_ProsusAI_finbert/05_TEST_full_final_2019_KUKU_DELETE
+OUTPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/03_runs/01_ProsusAI_finbert/00_full_final_10ep
 
 python train_test.py \
     --input_dir=$INPUT_DIR \
     --output_dir=$OUTPUT_DIR \
-    --task=Train \
+    --task=Test \
     \
     --model_name=ProsusAI/finbert \
     --seq_len=256 \
@@ -18,7 +18,7 @@ python train_test.py \
     --seed=1234 \
     --use_cuda=True \
     \
-    --n_epochs=5 \
+    --n_epochs=10 \
     --batch_size_train=250 \
     --shuffle_train=True \
     --drop_last_train=False \
