@@ -69,7 +69,7 @@ class News_model(nn.Module):
         self.fc_out = nn.Linear(in_features = self.h_dim, out_features = self.n_labels)
 
         # Sigmoid
-        self.sigmoid = nn.sigmoid()
+        self.sigmoid = nn.Sigmoid()
 
         # Dropout
         self.drops = nn.Dropout(self.dropout)
