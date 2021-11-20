@@ -1,4 +1,4 @@
-# v1 -> Preprocesses dataset to correct mistake with empty headlines
+model# v1 -> Preprocesses dataset to correct mistake with empty headlines
 # v2 -> No preprocessing. Fixed bug with binary predictions
 
 # Imports
@@ -24,10 +24,10 @@ class News_dataset(Dataset):
         self.labels = data_df['label1'].to_list()
         # Remove empty news
         slicer = [torch.equal(x, self.empty_token_ids) for x in self.token_ids]
-        self.token_ids = [i for idx, i in enumerate(self.token_ids) if slicer[idx]]
-        self.token_types = [i for idx, i in enumerate(self.token_types) if slicer[idx]]
-        self.att_masks = [i for idx, i in enumerate(self.att_masks) if slicer[idx]]
-        self.labels = [i for idx, i in enumerate(self.labels) if slicer[idx]]
+        self.token_ids = [i for idx, i in enumerate(self.token_ids) if not(slicer[idx])]
+        self.token_types = [i for idx, i in enumerate(self.token_types) if not(slicer[idx])]
+        self.att_masks = [i for idx, i in enumerate(self.att_masks) if not(slicer[idx])]
+        self.labels = [i for idx, i in enumerate(self.labels) if not(slicer[idx])]
         
         self.token_ids = torch.stack(self.token_ids)
         self.token_types = torch.stack(self.token_types)
