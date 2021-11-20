@@ -14,8 +14,8 @@ dev_df = pd.DataFrame()
 test_df = pd.DataFrame()
 
 #%% Path definitions
-input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/FULL'
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/02_full_dataset_1_year'
+input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/03_FULL-final'
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/04_full_final_2019'
 
 #input_folder = '/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/00_raw/01_full'
 #output_folder = '/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/01_FULL'

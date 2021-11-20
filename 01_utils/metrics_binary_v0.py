@@ -27,7 +27,7 @@ def compute_metrics(Y_ground_truth, Y_pred_binary, Y_pred_score):
     return precision, recall, f1, auc
 
 #%% Path definitions
-base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/03_TEST_2_1_year'
+base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/04_TEST_2_1_year_shuffled'
 
 #%% Global initialization
 random.seed(1234)
@@ -108,7 +108,7 @@ plt.ylim(-0.05, 1.05)
 plt.grid()
 plt.show()
 
-S#%% Plot learning curves
+#%% Plot learning curves
 plt.plot(train_results['training_loss'], label = 'train')
 plt.plot(train_results['validation_loss'], label = 'val')
 plt.xlabel('Epochs')
