@@ -1,3 +1,5 @@
+#v1 Splits into only train and dev
+
 #%% Imports
 import os
 import pandas as pd
@@ -14,7 +16,6 @@ output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy
 input_path = os.path.join(input_folder, 'preproc_2019_mapped_SP500_full.pkl')
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
 output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
-output_path_test = os.path.join(output_folder, 'model_test.pkl')
 
 #%% Load dataset
 dataset_df = pd.read_pickle(input_path)
@@ -38,20 +39,18 @@ print(f'Shape dataset before slicing = {dataset_df.shape}')
 print(f'Shape dataset after slicing = {output_df.shape}')
 
 #%% Split datasets
-train_set_df, test_dev_set_df = train_test_split(output_df, test_size = 0.2)
-dev_set_df, test_set_df = train_test_split(test_dev_set_df, test_size = 0.5)
+train_set_df, dev_set_df = train_test_split(output_df, test_size = 0.2, shuffle = False)
 
 #%% Check dataset sizes
 print(f'\nShape train set = {train_set_df.shape}')
 print(f'% train set: {len(train_set_df)/len(output_df)*100:.2f}%\n')
 print(f'Shape dev set = {dev_set_df.shape}')
 print(f'Dev: {len(dev_set_df)/len(output_df)*100:.2f}%\n')
-print(f'Shape test set = {test_set_df.shape}')
-print(f'Test: {len(test_set_df)/len(output_df)*100:.2f}%\n')
+
 
 #%% Save datasets
-
-
+if not os.path.isdir(output_folder):
+    os.makedirs(output_folder)
+    print("Created folder : ", output_folder)
 train_set_df.to_pickle(output_path_train)
 dev_set_df.to_pickle(output_path_dev)
-test_set_df.to_pickle(output_path_test)

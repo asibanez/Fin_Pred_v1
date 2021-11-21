@@ -1,3 +1,5 @@
+#v1 -> Metrics adapted to scores instead of logits
+
 # Computes metrics
 
 #%% Imports
@@ -44,11 +46,11 @@ with open(test_results_path) as fr:
     test_results = json.load(fr)
     
 #%% Extract results
-Y_pred_logits = test_results['Y_test_prediction_scores']
+Y_pred_scores = test_results['Y_test_prediction_scores']
 Y_ground_truth = test_results['Y_test_ground_truth']
 Y_pred_label = test_results['Y_test_prediction_binary']
 
-Y_pred_logits = [x[0] for x in Y_pred_logits]
+Y_pred_scores = [x[0] for x in Y_pred_scores]
 Y_ground_truth = [x[0] for x in Y_ground_truth]
 
 #%% Print ground truth class balance
@@ -59,11 +61,10 @@ print(f'\nRatio class 0 = {ratio_0 * 100:.2f}%')
 print(f'Ratio class 1 = {ratio_1 * 100:.2f}%')
 
 #%% Compute binary results
-Y_pred_scores = [sigmoid(x) for x in Y_pred_logits]
 Y_pred_binary = [round(x) for x in Y_pred_scores]
 print(pd.value_counts(Y_pred_binary))
 
-Y#%% Generate random results
+#%% Generate random results
 random_pred_score = []
 
 for i in range(0, len(Y_pred_scores)):
