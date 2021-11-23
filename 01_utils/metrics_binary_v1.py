@@ -29,7 +29,7 @@ def compute_metrics(Y_ground_truth, Y_pred_binary, Y_pred_score):
     return precision, recall, f1, auc
 
 #%% Path definitions
-base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/03_toy_TEST_shuffled'
+base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/04_2019_MA_final_sorted'
 
 #%% Global initialization
 random.seed(1234)
@@ -57,12 +57,16 @@ Y_ground_truth = [x[0] for x in Y_ground_truth]
 ratio_0 = Y_ground_truth.count(0) / len(Y_ground_truth)
 ratio_1 = Y_ground_truth.count(1) / len(Y_ground_truth)
 
-print(f'\nRatio class 0 = {ratio_0 * 100:.2f}%')
+print('\nTest set distribution')
+print(f'Ratio class 0 = {ratio_0 * 100:.2f}%')
 print(f'Ratio class 1 = {ratio_1 * 100:.2f}%')
 
 #%% Compute binary results
 Y_pred_binary = [round(x) for x in Y_pred_scores]
-print(pd.value_counts(Y_pred_binary))
+value_counts = pd.value_counts(Y_pred_binary)
+print('\nPrediction distribution')
+print(f'Ratio class 0 = {value_counts[0] / (value_counts[0] + value_counts[1]):.2f}%')
+print(f'Ratio class 1 = {value_counts[1] / (value_counts[0] + value_counts[1]):.2f}%')
 
 #%% Generate random results
 random_pred_score = []
@@ -73,7 +77,7 @@ for i in range(0, len(Y_pred_scores)):
 random_pred_binary = [1 if x >= threshold else 0 for x in random_pred_score]
 
 #%% Print results    
-print(classification_report(Y_ground_truth, Y_pred_binary))
+print(f'\n{classification_report(Y_ground_truth, Y_pred_binary)}')
 
 #%% Compute metrics
 precision, recall, f1, auc = compute_metrics(Y_ground_truth,
@@ -81,8 +85,8 @@ precision, recall, f1, auc = compute_metrics(Y_ground_truth,
                                              Y_pred_scores)
 
 print(f'\nPrecision =\t{precision:.2f}')
-print(f'Recall =\t{recall:.2f}')
-print(f'F1 =\t\t{f1:.2f}')
+print(f'Recall =\t\t{recall:.2f}')
+print(f'F1 =\t\t\t{f1:.2f}')
 print(f'AUC =\t\t{auc:.2f}')
 
 #%% Plot ROC curve
@@ -113,8 +117,17 @@ plt.show()
 plt.plot(train_results['training_loss'], label = 'train')
 plt.plot(train_results['validation_loss'], label = 'val')
 plt.xlabel('Epochs')
+plt.ylabel('loss')
 plt.legend(loc = 'upper right')
 #plt.ylim(0.05, 0.75)
+plt.grid()
+plt.show()
+
+plt.plot(train_results['training_acc'], label = 'train')
+plt.plot(train_results['validation_acc'], label = 'val')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend(loc = 'upper right')
 plt.grid()
 plt.show()
 
