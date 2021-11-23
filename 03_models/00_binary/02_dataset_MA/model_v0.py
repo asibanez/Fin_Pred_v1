@@ -1,3 +1,6 @@
+# v0 -> Preprocesses dataset to correct mistake with empty headlines
+
+
 # Imports
 import torch
 import torch.nn as nn
@@ -7,10 +10,29 @@ from transformers import AutoModel
 #%% DataClass definition
 class News_dataset(Dataset):
     def __init__(self, data_df):
-        self.token_ids = torch.stack(list(data_df['token_ids'][0]))
-        self.token_types = torch.stack(list(data_df['token_types'][0]))
-        self.att_masks = torch.stack(list(data_df['att_masks'][0]))
-        self.labels = torch.LongTensor(list(data_df['label1']))
+        # Define empty paragraph
+        self.empty_token_ids = torch.zeros(256).type(torch.LongTensor)
+        self.empty_token_ids[0] = 101
+        self.empty_token_ids[1] = 102
+        # Extract selected features
+        self.token_ids = data_df['token_ids'].to_list()
+        self.token_ids = [x[0] for x in self.token_ids]
+        self.token_types = data_df['token_types'].to_list()
+        self.token_types = [x[0] for x in self.token_types]
+        self.att_masks = data_df['att_masks'].to_list()
+        self.att_masks = [x[0] for x in self.att_masks]
+        self.labels = data_df['label1'].to_list()
+        # Remove empty news
+        slicer = [torch.equal(x, self.empty_token_ids) for x in self.token_ids]
+        self.token_ids = [i for idx, i in enumerate(self.token_ids) if not(slicer[idx])]
+        self.token_types = [i for idx, i in enumerate(self.token_types) if not(slicer[idx])]
+        self.att_masks = [i for idx, i in enumerate(self.att_masks) if not(slicer[idx])]
+        self.labels = [i for idx, i in enumerate(self.labels) if not(slicer[idx])]
+        # Generate tensors
+        self.token_ids = torch.stack(self.token_ids)
+        self.token_types = torch.stack(self.token_types)
+        self.att_masks = torch.stack(self.att_masks)
+        self.labels = torch.LongTensor(self.labels)
                                         
     def __len__(self):
         return len(self.token_ids)
@@ -46,8 +68,8 @@ class News_model(nn.Module):
         # Fully connected output
         self.fc_out = nn.Linear(in_features = self.h_dim, out_features = self.n_labels)
 
-        # Softmax
-        #self.softmax = nn.Softmax(dim = 1)
+        # Sigmoid
+        self.sigmoid = nn.Sigmoid()
 
         # Dropout
         self.drops = nn.Dropout(self.dropout)
@@ -67,5 +89,6 @@ class News_model(nn.Module):
         # Multi-label classifier      
         out = self.bn1(out)                                      # batch_size x h_dim
         out = self.fc_out(out)                                   # batch_size x n_lab
+        out = self.sigmoid(out)                                  # batch_size x n_lab
 
         return out

@@ -1,3 +1,5 @@
+# v0
+
 # Imports
 import torch
 import torch.nn as nn
@@ -6,12 +8,12 @@ from transformers import AutoModel
 
 #%% DataClass definition
 class News_dataset(Dataset):
-    def __init__(self, data_df):
-        self.token_ids = torch.stack(list(data_df['token_ids'][0]))
-        self.token_types = torch.stack(list(data_df['token_types'][0]))
-        self.att_masks = torch.stack(list(data_df['att_masks'][0]))
-        self.labels = torch.LongTensor(list(data_df['label1']))
-                                        
+    def __init__(self, data_df):                
+        self.token_ids = torch.stack(list(data_df['token_ids']))
+        self.token_types = torch.stack(list(data_df['token_types']))
+        self.att_masks = torch.stack(list(data_df['att_masks']))
+        self.labels = torch.LongTensor(list(data_df['Y']))                
+
     def __len__(self):
         return len(self.token_ids)
         
@@ -46,8 +48,8 @@ class News_model(nn.Module):
         # Fully connected output
         self.fc_out = nn.Linear(in_features = self.h_dim, out_features = self.n_labels)
 
-        # Softmax
-        #self.softmax = nn.Softmax(dim = 1)
+        # Sigmoid
+        self.sigmoid = nn.Sigmoid()
 
         # Dropout
         self.drops = nn.Dropout(self.dropout)
@@ -67,5 +69,6 @@ class News_model(nn.Module):
         # Multi-label classifier      
         out = self.bn1(out)                                      # batch_size x h_dim
         out = self.fc_out(out)                                   # batch_size x n_lab
+        out = self.sigmoid(out)                                  # batch_size x n_lab
 
         return out

@@ -1,8 +1,8 @@
-#INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/04_full_final_2019
-#OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/05_run_full_2019_final
+INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/01_toy_2019_SIL_shuffled_v1
+OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/06_KUKU
 
-INPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/03_full_final_2019
-OUTPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/03_runs/01_ProsusAI_finbert/01_full_final_10ep_TEST_DELETE
+#INPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/03_full_final_2019
+#OUTPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/03_runs/01_ProsusAI_finbert/01_full_final_10ep_TEST_DELETE
 
 python -m ipdb train_test.py \
     --input_dir=$INPUT_DIR \
@@ -39,7 +39,7 @@ python -m ipdb train_test.py \
     --batch_size_test=200 \
     --gpu_id_test=0 \
 
-#read -p 'EOF'
+read -p 'EOF'
 
 #--model_name=nlpaueb/legal-bert-small-uncased \
 #--hidden_dim=512 \

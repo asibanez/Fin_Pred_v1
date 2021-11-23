@@ -9,7 +9,7 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from model_v2 import News_dataset, News_model
+from model_v0 import News_dataset, News_model
 import utils.utils as utils
 
 #%% Function definitions

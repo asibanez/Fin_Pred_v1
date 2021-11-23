@@ -142,7 +142,7 @@ def save_train_results_f(args, train_loss_history, train_acc_history, val_loss_h
     results = {'training_loss': train_loss_history,
                'training_acc': train_acc_history,
                'validation_loss': val_loss_history,
-               'validation_acc': val_loss_history,
+               'validation_acc': val_acc_history,
                'start time': str(start_time),
                'end time': str(end_time)}
     with open(output_path_results, 'w') as fw:

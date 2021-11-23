@@ -1,4 +1,4 @@
-#v1 Splits into only train and dev
+#v1 Splits into only train and dev sets
 
 #%% Imports
 import os
@@ -7,11 +7,11 @@ from sklearn.model_selection import train_test_split
 
 #%% Global initialization
 pd.set_option('display.max_rows', 100)
+shuffle = False
 
 #%% Path definitions
-input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/00_toy'
-#input_folder = '/data/rsg/nlp/sibanez/00_temp/01_fin_pred/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary'
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/05_toy_TEST'
+input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/00_toy_2019_SIL_shuffled_v0'
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/01_toy_2019_SIL_sorted'
 
 input_path = os.path.join(input_folder, 'preproc_2019_mapped_SP500_full.pkl')
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
@@ -39,7 +39,7 @@ print(f'Shape dataset before slicing = {dataset_df.shape}')
 print(f'Shape dataset after slicing = {output_df.shape}')
 
 #%% Split datasets
-train_set_df, dev_set_df = train_test_split(output_df, test_size = 0.2, shuffle = False)
+train_set_df, dev_set_df = train_test_split(output_df, test_size = 0.2, shuffle = shuffle)
 
 #%% Check dataset sizes
 print(f'\nShape train set = {train_set_df.shape}')
