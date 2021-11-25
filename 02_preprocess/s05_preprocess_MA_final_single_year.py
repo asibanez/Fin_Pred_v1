@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 #%% Global initialization
 pd.set_option('display.max_rows', 100)
 data_file = 'validation.pkl' #train.pkl / validation.pkl / test.pkl
-year = 2018
+year = 2017
 shuffle = False
             
 train_df = pd.DataFrame()
@@ -17,7 +17,7 @@ dev_df = pd.DataFrame()
 
 # Laptop
 input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/03_FULL-MA-final'
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/06_2018_MA_final_sorted'
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/07_2017_MA_final_sorted'
 
 # Server
 #input_folder = '/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/00_raw/01_full'
