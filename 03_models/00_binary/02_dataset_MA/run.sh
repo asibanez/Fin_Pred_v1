@@ -1,13 +1,13 @@
 #INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/04_full_final_2019
 #OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/05_run_full_2019_final
 
-INPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/03_full_final_2019
-OUTPUT_DIR=/home/sibanez/Projects/MyInvestor/NLP/01_spyproject/00_data/03_runs/01_ProsusAI_finbert/01_full_final_10ep_TEST_DELETE
+INPUT_DIR=/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/06_2018_MA_final_sorted
+OUTPUT_DIR=/home/sibanez/Projects/00_MyInvestor/00_data/03_runs/01_ProsusAI_finbert/05_2018_MA_final_sorted
 
-python -m ipdb train_test.py \
+python train_test.py \
     --input_dir=$INPUT_DIR \
     --output_dir=$OUTPUT_DIR \
-    --task=Train \
+    --task=Test \
     \
     --model_name=ProsusAI/finbert \
     --seq_len=256 \
@@ -19,7 +19,7 @@ python -m ipdb train_test.py \
     --use_cuda=True \
     \
     --n_epochs=10 \
-    --batch_size_train=60 \
+    --batch_size_train=280 \
     --shuffle_train=True \
     --drop_last_train=False \
     --dev_train_ratio=2 \
@@ -32,10 +32,10 @@ python -m ipdb train_test.py \
     --save_final_model=True \
     --save_model_steps=True \
     --save_step_cliff=0 \
-    --gpu_ids_train=3 \
+    --gpu_ids_train=0,1,2,3 \
     \
     --test_file=model_test.pkl \
-    --model_file=model.pt.2 \
+    --model_file=model.pt.1 \
     --batch_size_test=200 \
     --gpu_id_test=0 \
 
