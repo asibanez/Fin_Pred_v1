@@ -15,11 +15,11 @@ class News_dataset(Dataset):
         self.empty_token_ids[0] = 101
         self.empty_token_ids[1] = 102
         # Extract selected features
-        self.token_ids = data_df['token_ids'].to_list()
+        self.token_ids = data_df['token_ids_1'].to_list()
         self.token_ids = [x[0] for x in self.token_ids]
-        self.token_types = data_df['token_types'].to_list()
+        self.token_types = data_df['token_types_1'].to_list()
         self.token_types = [x[0] for x in self.token_types]
-        self.att_masks = data_df['att_masks'].to_list()
+        self.att_masks = data_df['att_masks_1'].to_list()
         self.att_masks = [x[0] for x in self.att_masks]
         self.labels = data_df['label1'].to_list()
         # Remove empty news
