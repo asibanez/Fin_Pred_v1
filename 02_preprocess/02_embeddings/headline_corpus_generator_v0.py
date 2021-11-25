@@ -12,7 +12,7 @@ from datetime import datetime
 #%% Path definitions
 # Local
 input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/03_FULL-MA-final'
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/03_FULL-MA-final'
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/03_FT_LM'
 
 # Server
 #input_folder = ''
@@ -38,9 +38,24 @@ headlines = [x for x in headlines if 'IMBALANCE' not in x]
 headlines = ' '.join(headlines)
 headlines = headlines.lower()
 
+#%% Check number of tokens in corpus
+tokens = nltk.word_tokenize(headlines)
+unique_tokens = list(set(tokens))
+print(f'Number of tokens = {len(tokens):,}')
+print(f'Number of unique tokens = {len(unique_tokens):,}')
+
 #%% Save corpus
+if not os.path.isdir(output_folder):
+    os.makedirs(output_folder)
+    print("Created folder : ", output_folder)
+
 output_corpus_path = os.path.join(output_folder, output_corpus_file_name)
-with codecs.open(output_corpus_path) as fw:
+with codecs.open(output_corpus_path, 'w', 'utf-8') as fw:
     fw.write(headlines)
 
-#%% Embedding generation
+#%% LM generation
+model = fasttext.train_unsupervised(output_corpus_path)
+
+#%% Save LM
+output_LM_path = os.path.join(output_folder, output_LM_file_name)
+model.save_model(output_LM_path)
