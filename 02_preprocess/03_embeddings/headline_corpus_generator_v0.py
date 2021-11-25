@@ -1,4 +1,4 @@
-# v0
+v0
 
 #%% Imports
 import os
@@ -11,12 +11,12 @@ from datetime import datetime
 
 #%% Path definitions
 # Local
-input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/03_FULL-MA-final'
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/03_FT_LM'
+#input_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/03_FULL-MA-final'
+#output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/03_FT_LM'
 
 # Server
-#input_folder = ''
-#output_folder = ''
+input_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/00_raw/03_FULL-MA-final'
+output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/03_FT_LM'
 
 #%% Global initialization
 input_file_name = 'test.pkl'
