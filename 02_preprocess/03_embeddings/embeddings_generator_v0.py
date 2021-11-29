@@ -1,0 +1,89 @@
+# v0
+
+#%% Imports
+import os
+import nltk
+import fasttext
+import pandas as pd
+from tqdm import tqdm
+from datetime import datetime
+from sklearn.model_selection import train_test_split
+
+#%% Path definition
+# Local
+input_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/04_FULL-MA-final_fixed/2018_headlines.pkl'
+model_path = ''
+output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/03_FastText_LM/01_preprocessed'
+
+# Server
+#input_path = ''
+#model_path = ''
+#output_folder = ''
+
+output_path_train = os.path.join(output_folder, 'model_train.pkl')
+output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
+
+#%% Global initialization
+seq_len = 64
+shuffle = False
+
+#%% Load model and read input data
+print(f'{datetime.now()} Loading model and dataset')
+model = fasttext.load_model(model_path)
+data_df = pd.read_pickle(input_path)
+print(f'{datetime.now()} Done')
+
+#%% Generate embeddings
+data_df = data_df[['dscd',
+                   'date',
+                   'label1',
+                   'label2',
+                   'label3',
+                   'label4',
+                   'label5',
+                   'headline',
+                   'headline_1',
+                   'headline_2',
+                   'headline_3']]
+
+aux_1 = []
+for entry in tqdm(data_df.headline):
+    aux_2 = []
+    for headline in entry:
+        headline = headline.lower()
+        tokens = nltk.word_tokenize(headline)
+        tokens = tokens[0:seq_len]
+        tokens += [' '] * (seq_len - len(tokens))
+        embeddings = [model.get_word_vector(x) for x in tokens]
+        assert(len(embeddings) == seq_len)
+        aux_2.append(embeddings)       
+    aux_1.append(aux_2)
+    
+data_df['embeddings'] = aux_1
+
+#%% Check dataset size and years present
+print(f'Shape dataset = {data_df.shape}\n')
+years = [x.year for x in data_df.date]
+print(pd.value_counts(years))
+
+#%% Dataset split
+train_df, dev_df = train_test_split(data_df, test_size=0.2, shuffle = shuffle)
+
+#%% Check dataset size
+print(f'Shape train set = {train_df.shape}')
+print(f'Shape dev set = {dev_df.shape}')
+
+print(f'% train set = {len(train_df) / len(data_df):.2f}')
+print(f'% dev set = {len(dev_df) / len(data_df):.2f}')
+
+#%% Save output datasets
+if not os.path.isdir(output_folder):
+    os.makedirs(output_folder)
+    print("Created folder : ", output_folder)
+
+print(f'{datetime.now()} Saving datasets')
+train_df.to_pickle(output_path_train)
+dev_df.to_pickle(output_path_dev)
+print(f'{datetime.now()} Done')
+
+
