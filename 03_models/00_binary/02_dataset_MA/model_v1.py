@@ -73,7 +73,7 @@ class News_model(nn.Module):
         self.fc_out = nn.Linear(in_features = 100, out_features = self.n_labels)
 
         # Relu
-        self.relu = nn.Relu()
+        self.relu = nn.ReLU()
 
         # Sigmoid
         self.sigmoid = nn.Sigmoid()

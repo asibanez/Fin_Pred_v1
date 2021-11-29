@@ -1,8 +1,8 @@
 #INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/04_full_final_2019
 #OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/05_run_full_2019_final
 
-INPUT_DIR=/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/07_2017_MA_final_sorted
-OUTPUT_DIR=/home/sibanez/Projects/00_MyInvestor/00_data/03_runs/01_ProsusAI_finbert/06_2017_MA_final_sorted
+INPUT_DIR=/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/08_2018_MA_fin_sort_att_m_fix
+OUTPUT_DIR=/home/sibanez/Projects/00_MyInvestor/00_data/03_runs/01_ProsusAI_finbert/10_2018_MA_fin_sort_att_m_fix_v1
 
 python train_test.py \
     --input_dir=$INPUT_DIR \
@@ -45,7 +45,4 @@ python train_test.py \
 #--hidden_dim=512 \
 
 #--task=Train / Test
-#--batch_size=40
-#--batch_size=25 / 0,1,2,3
-#--n_epochs=100
-#--max_n_pars=200
+#--batch_size=280 / 0,1,2,3
