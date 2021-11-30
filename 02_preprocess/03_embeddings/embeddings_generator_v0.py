@@ -11,14 +11,14 @@ from sklearn.model_selection import train_test_split
 
 #%% Path definition
 # Local
-input_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/04_FULL-MA-final_fixed/2018_headlines.pkl'
-model_path = ''
-output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/03_FastText_LM/01_preprocessed'
+#input_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/00_raw/04_FULL-MA-final_fixed/2018_headlines.pkl'
+#model_path = ''
+#output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/03_FastText_LM/01_preprocessed'
 
 # Server
-#input_path = ''
-#model_path = ''
-#output_folder = ''
+input_path = '/home/sibanez/Projects/00_MyInvestor/00_data/00_raw/04_FULL-MA-final-fixed/2018_headlines.pkl'
+model_path = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/03_FastText_LM/00_models/cc.en.300.bin'
+output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/03_FastText_LM/01_preprocessed/2018'
 
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
 output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
@@ -53,7 +53,7 @@ for entry in tqdm(data_df.headline):
         headline = headline.lower()
         tokens = nltk.word_tokenize(headline)
         tokens = tokens[0:seq_len]
-        tokens += [' '] * (seq_len - len(tokens))
+        tokens += [''] * (seq_len - len(tokens))
         embeddings = [model.get_word_vector(x) for x in tokens]
         assert(len(embeddings) == seq_len)
         aux_2.append(embeddings)       
