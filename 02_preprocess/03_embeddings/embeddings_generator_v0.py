@@ -49,9 +49,9 @@ id_2_vec[1] = pad_vector
 
 word_list = model.get_words()
 
-for idx, word in enumerate(word_list):
+for idx, word in enumerate(tqdm(word_list)):
     word_vector = model.get_word_vector(word)
-    id_2_vec[idx + 2] = id_2_vec.append(word_vector) 
+    id_2_vec[idx + 2] = word_vector
 
 #%% Generate new dataset with token ids
 data_df = data_df[['dscd',
@@ -74,7 +74,7 @@ for entry in tqdm(data_df.headline):
         tokens = nltk.word_tokenize(headline)
         tokens = tokens[0:seq_len]
         tokens += [pad_token] * (seq_len - len(tokens))
-        ids = [model.get_word_vector(x) for x in tokens]
+        ids = [1 if x == pad_token else model.get_word_id(x) for x in tokens]
         ids = [x if x != -1 else 0 for x in ids]
         assert(len(ids) == seq_len)
         aux_2.append(ids)       
