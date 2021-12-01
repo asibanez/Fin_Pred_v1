@@ -150,10 +150,10 @@ def main():
     elif args.task == 'Test':
         # Load datasets
         print('Loading data')
-        test_dataset = pd.read_pickle(path_test_dataset, args)
+        test_dataset = pd.read_pickle(path_test_dataset)
         print('Done')
         # Instantiate dataclasses
-        test_dataset = News_dataset(test_dataset)
+        test_dataset = News_dataset(test_dataset, args)
         # Instantiate dataloaders
         test_dl = DataLoader(test_dataset,
                              batch_size = int(args.batch_size_test),
