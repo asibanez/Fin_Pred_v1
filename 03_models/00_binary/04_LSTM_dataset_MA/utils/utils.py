@@ -14,6 +14,8 @@ def parse_args_f():
                         help = 'input folder')
     parser.add_argument('--output_dir', default = None, type = str, required = True,
                         help = 'output folder')
+    parser.add_argument('--id_2_vec_path', default = None, type = str, required = True,
+                        help = 'path to id_2_vec dictionary')
     parser.add_argument('--task', default = None, type = str, required = True,
                         help = 'number of total epochs to run')
     
@@ -22,19 +24,21 @@ def parse_args_f():
                         help = 'BERT_model_name')   
     parser.add_argument('--seq_len', default = None, type = int, required = True,
                         help = 'text sequence length')
-    parser.add_argument('--num_labels', default = None, type = int, required = True,
-                        help = 'number of labels')
-    parser.add_argument('--n_heads', default = None, type = int, required = True,
-                        help = 'number of transformer heads')
+    parser.add_argument('--num_classes', default = None, type = int, required = True,
+                        help = 'number of classes')
     parser.add_argument('--hidden_dim', default = None, type = int, required = True,
                         help = 'lstm hidden dimension')
+    parser.add_argument('--emb_dim', default = None, type = int, required = True,
+                        help = 'embeddings dimension')
     parser.add_argument('--pad_idx', default = None, type = int, required = True,
                         help = 'pad token index')      
     parser.add_argument('--seed', default = None, type = int, required = True,
                         help = 'random seed')
     parser.add_argument('--use_cuda', default = None, type = str, required = True,
                         help = 'use CUDA')
-    
+    parser.add_argument('--remove_empty_entries', default = None, type = str, required = True,
+                        help = 'remove empty entreis from datasets')
+        
     # Train arguments
     parser.add_argument('--n_epochs', default = None, type = int, required = True,
                         help = 'number of total epochs to run')
@@ -58,6 +62,8 @@ def parse_args_f():
                         help = 'dropout')
     parser.add_argument('--momentum', default = None, type = float, required = True,
                         help = 'momentum')
+    parser.add_argument('--freeze_emb', default = None, type = str, required = True,
+                        help = 'Freeze embeddings for training')
     parser.add_argument('--save_final_model', default = None, type = str, required = True,
                         help = 'final .pt model is saved in output folder')
     parser.add_argument('--save_model_steps', default = None, type = str, required = True,

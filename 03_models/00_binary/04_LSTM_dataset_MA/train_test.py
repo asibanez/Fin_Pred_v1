@@ -3,13 +3,14 @@
 #%% Imports
 import os
 import random
+import pickle
 import datetime
 import pandas as pd
 from tqdm import tqdm
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from model_v1 import News_dataset, News_model
+from model_v0 import News_dataset, News_model
 import utils.utils as utils
 
 #%% Function definitions
@@ -33,14 +34,15 @@ def run_epoch_f(args, mode, model, criterion, optimizer,
     Y_pred_labels = []
     Y_gr_truth = []
     
-    for step_idx, (X_token_ids, X_token_types, X_att_masks, Y_labels) in \
+    for step_idx, (X_news_id_1, X_news_id_2, X_news_id_3, X_news_id_4, Y_labels) in \
         tqdm(enumerate(data_loader), total = len(data_loader), desc = mode_desc):
         
         # Move data to cuda
         if next(model.parameters()).is_cuda:
-            X_token_ids = X_token_ids.to(device)
-            X_token_types = X_token_types.to(device)
-            X_att_masks = X_att_masks.to(device)
+            X_news_id_1 = X_news_id_1.to(device)
+            X_news_id_2 = X_news_id_2.to(device)
+            X_news_id_3 = X_news_id_3.to(device)
+            X_news_id_4 = X_news_id_4.to(device)
             Y_labels = Y_labels.to(device)
         
         # Train step
@@ -48,7 +50,7 @@ def run_epoch_f(args, mode, model, criterion, optimizer,
             # Zero gradients
             optimizer.zero_grad()
             #Forward + backward + optimize
-            pred_score = model(X_token_ids, X_token_types, X_att_masks)
+            pred_score = model(X_news_id_1, X_news_id_2, X_news_id_3, X_news_id_4)
             # Compute loss
 ####
             Y_labels = Y_labels.unsqueeze(1).to(torch.float)
@@ -62,7 +64,7 @@ def run_epoch_f(args, mode, model, criterion, optimizer,
         # Eval / Test step        
         else:
             with torch.no_grad(): 
-                pred_score = model(X_token_ids, X_token_types, X_att_masks)
+                pred_score = model(X_news_id_1, X_news_id_2, X_news_id_3, X_news_id_4)
                 # Compute loss
 ####
                 Y_labels = Y_labels.unsqueeze(1).to(torch.float)
@@ -70,7 +72,7 @@ def run_epoch_f(args, mode, model, criterion, optimizer,
                 loss = criterion(pred_score, Y_labels)
         
         # Book-keeping
-        current_batch_size = X_token_ids.size()[0]
+        current_batch_size = X_news_id_1.size()[0]
         total_entries += current_batch_size
         sum_loss += (loss.item() * current_batch_size)
         pred_labels = torch.round(pred_score)
@@ -105,6 +107,7 @@ def main():
     path_train_dataset = os.path.join(args.input_dir, 'model_train.pkl')
     path_dev_dataset = os.path.join(args.input_dir, 'model_dev.pkl')
     path_test_dataset = os.path.join(args.input_dir, args.test_file)
+    path_id_2_vec = args.id_2_vec_path
     
     # Create ouput dir if not existing
     utils.make_dir_f(args.output_dir)
@@ -115,6 +118,12 @@ def main():
     # Global and seed initialization
     random.seed = args.seed
     _ = torch.manual_seed(args.seed)
+
+    # Load id_2_vec
+    with open(path_id_2_vec, 'rb') as fr:
+        print('Loading id_2_vec dictionary')
+        id_2_vec = pickle.load(fr)
+        print('Done')
 
     # Generate dataloaders
     if args.task == 'Train':
@@ -128,8 +137,8 @@ def main():
             train_dataset = train_dataset[0:args.len_train_toy_data]
             dev_dataset = dev_dataset[0:args.len_train_toy_data]
         # Instantiate dataclasses
-        train_dataset = News_dataset(train_dataset)
-        dev_dataset = News_dataset(dev_dataset)
+        train_dataset = News_dataset(train_dataset, args)
+        dev_dataset = News_dataset(dev_dataset, args)
         # Instantiate dataloaders
         train_dl = DataLoader(train_dataset, batch_size = args.batch_size_train,
                               shuffle = eval(args.shuffle_train),
@@ -141,7 +150,7 @@ def main():
     elif args.task == 'Test':
         # Load datasets
         print('Loading data')
-        test_dataset = pd.read_pickle(path_test_dataset)
+        test_dataset = pd.read_pickle(path_test_dataset, args)
         print('Done')
         # Instantiate dataclasses
         test_dataset = News_dataset(test_dataset)
@@ -151,7 +160,7 @@ def main():
                              shuffle = False)
 
     # Instantiate model
-    model = News_model(args)
+    model = News_model(args, id_2_vec)
 
     # Set device and move model to device
     model, device = utils.model_2_device_f(args, model)
