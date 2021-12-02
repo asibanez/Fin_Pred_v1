@@ -1,4 +1,4 @@
-# v0
+# v0 Takes a single dataset and generates train and dev bow sets
 
 #%% Imports
 import os
@@ -19,7 +19,7 @@ from sklearn.model_selection import train_test_split
 
 # Server
 input_path = '/home/sibanez/Projects/00_MyInvestor/00_data/00_raw/04_FULL-MA-final-fixed/2018_headlines.pkl'
-output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/04_BOW/00_binary/00_TEST'
+output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/04_BOW/00_binary/01_2018_no_imbalance'
 
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
 output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
@@ -71,7 +71,6 @@ headlines = train_df.headline.to_list()
 headlines = [x for sublist in headlines for x in sublist]
 headlines = [x for x in headlines if x != '']
 headlines = [unidecode.unidecode(x) for x in headlines]
-#headlines = [x for x in headlines if 'IMBALANCE' not in x]
 headlines = ' '.join(headlines)
 headlines = headlines.lower()
 
