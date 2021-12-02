@@ -29,7 +29,7 @@ def compute_metrics(Y_ground_truth, Y_pred_binary, Y_pred_score):
     return precision, recall, f1, auc
 
 #%% Path definitions
-base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/01_ProsusAI_finbert/00_binary/07_2018_MA_final_sorted_fixed'
+base_path = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/02_embeddings/00_binary/04_100ep_non-empty_entries_lr_2e-3'
 
 #%% Global initialization
 random.seed(1234)

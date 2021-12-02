@@ -53,3 +53,13 @@ print(f'{datetime.now()} Saving datasets')
 train_df.to_pickle(output_path_train)
 dev_df.to_pickle(output_path_dev)
 print(f'{datetime.now()} Done')
+
+#%% Save output datasets
+if not os.path.isdir(output_folder):
+    os.makedirs(output_folder)
+    print("Created folder : ", output_folder)
+
+print(f'{datetime.now()} Saving datasets')
+train_df.to_pickle(output_path_train)
+dev_df.to_pickle(output_path_dev)
+print(f'{datetime.now()} Done')
