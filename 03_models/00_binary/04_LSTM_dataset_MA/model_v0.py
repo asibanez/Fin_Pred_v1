@@ -9,9 +9,9 @@ from torch.utils.data import Dataset
 class News_dataset(Dataset):
     def __init__(self, data_df, args):
         # Remove empty entries
-#        if args.remove_empty_entries == True:
-#            slicer = slicer = [x != ['','','',''] for x in data_df.headline]
-#            data_df = data_df[slicer]
+        if args.remove_empty_entries == True:
+            slicer = [x != ['','','',''] for x in data_df.headline]
+            data_df = data_df[slicer]
             
         # Extract selected features
         self.news_id_1 = [x[0] for x in data_df['ids']] 
