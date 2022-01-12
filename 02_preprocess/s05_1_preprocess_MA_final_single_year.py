@@ -1,3 +1,5 @@
+# v1 -> Works with single year files: XXXX_headlines.pkl
+
 #%% Imports
 import os
 import pandas as pd
@@ -20,8 +22,8 @@ dev_df = pd.DataFrame()
 #output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/07_2017_MA_final_sorted'
 
 # Server
-input_path = '/home/sibanez/Projects/00_MyInvestor/00_data/00_raw/04_FULL-MA-final-fixed/2018_headlines.pkl'
-output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/02_ProsusAI_finbert/00_binary/08_2018_MA_fin_sort_att_m_fix'
+input_path = '/data/news/Headlines/Attention/refinitiv/2018_headlines.pkl'
+output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/05_RefinitivBert/00_binary/00_2018_sorted'
 
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
 output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
@@ -54,12 +56,3 @@ train_df.to_pickle(output_path_train)
 dev_df.to_pickle(output_path_dev)
 print(f'{datetime.now()} Done')
 
-#%% Save output datasets
-if not os.path.isdir(output_folder):
-    os.makedirs(output_folder)
-    print("Created folder : ", output_folder)
-
-print(f'{datetime.now()} Saving datasets')
-train_df.to_pickle(output_path_train)
-dev_df.to_pickle(output_path_dev)
-print(f'{datetime.now()} Done')
