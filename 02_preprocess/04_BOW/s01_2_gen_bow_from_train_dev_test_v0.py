@@ -5,6 +5,7 @@
 #%% Imports
 import os
 import nltk
+import pickle
 import string
 import unidecode
 import pandas as pd
@@ -19,16 +20,17 @@ from nltk.corpus import stopwords
 #output_folder = 'C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/03_spy_project/00_data/03_runs/03_BOW/00_TEST'
 
 # Server
-input_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/00_raw/04_FULL-MA-final-fixed/2018_headlines.pkl'
-output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/04_BOW/00_binary/01_2018_no_imbalance'
+input_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/00_raw/00_FULL-MA-final-fixed/01_train_dev_test'
+output_folder = '/home/sibanez/Projects/00_MyInvestor/00_data/02_preprocessed/04_BOW/00_binary/01_ALL'
 
-input_path_train = os.path.join(output_folder, 'train.pkl')
-input_path_dev = os.path.join(output_folder, 'dev.pkl')
-input_path_test = os.path.join(output_folder, 'test.pkl')
+input_path_train = os.path.join(input_folder, 'train.pkl')
+input_path_dev = os.path.join(input_folder, 'dev.pkl')
+input_path_test = os.path.join(input_folder, 'test.pkl')
 
 output_path_train = os.path.join(output_folder, 'model_train.pkl')
 output_path_dev = os.path.join(output_folder, 'model_dev.pkl')
 output_path_test = os.path.join(output_folder, 'model_test.pkl')
+output_path_bow_vocab = os.path.join(output_folder, 'bow_vocab.pkl')
 
 #%% Global initialization
 shuffle = False
@@ -69,9 +71,9 @@ print(f'Shape test_set = {test_df.shape}\n')
 years_train = [x.year for x in train_df.date]
 years_dev = [x.year for x in dev_df.date]
 years_test = [x.year for x in test_df.date]
-print(f'\nValue counts years train:\n{pd.value_counts(years_train)}')
-print(f'Value counts years dev:\n{pd.value_counts(years_dev)}')
-print(f'Value counts years test:\n{pd.value_counts(years_test)}')
+print(f'\nValue counts years train:\n{pd.value_counts(years_train).sort_index()}')
+print(f'Value counts years dev:\n{pd.value_counts(years_dev).sort_index()}')
+print(f'Value counts years test:\n{pd.value_counts(years_test).sort_index()}')
 
 size_full_set = len(train_df) + len(dev_df) + len(test_df)
 
@@ -80,14 +82,17 @@ print(f'\n% dev set = {len(dev_df) / size_full_set:.2f}')
 print(f'\n% test set = {len(test_df) / size_full_set:.2f}')
 
 #%% Generate corpus from train set
+print(f'{datetime.now()}: Generating corpus from train set')
 headlines = train_df.headline.to_list()
 headlines = [x for sublist in headlines for x in sublist]
 headlines = [x for x in headlines if x != '']
 headlines = [unidecode.unidecode(x) for x in headlines]
 headlines = ' '.join(headlines)
 headlines = headlines.lower()
+print(f'{datetime.now()}: Done')
 
 #%% Generate vocabulary from train set
+print(f'{datetime.now()}: Generating vocabulary from train set')
 tokens = nltk.word_tokenize(headlines)
 tokens = [x for x in tokens if x not in stopwords_en]
 tokens = [x for x in tokens if x not in string.punctuation]
@@ -136,6 +141,9 @@ test_df['bow'] = bow_aux
 if not os.path.isdir(output_folder):
     os.makedirs(output_folder)
     print("Created folder : ", output_folder)
+
+with open(output_path_bow_vocab, 'wb') as fw:
+	pickle.dump(bow_vocab, fw)
 
 print(f'{datetime.now()} Saving train set')
 train_df.to_pickle(output_path_train)
